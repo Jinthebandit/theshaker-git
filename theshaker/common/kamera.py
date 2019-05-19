@@ -9,6 +9,7 @@ from skimage.measure import compare_ssim
 
 # Local Imports
 
+# Erstellt Foto zur Kalibrierung und speichert es zur spaeteren Verwendung
 def calibrate(self,msg):
 	camera = PiCamera()
 	camera.resolution = (640,480)
@@ -22,6 +23,7 @@ def calibrate(self,msg):
 	cv2.imwrite("../resources/calibrate.jpg", calibrate)
 	camera.close()
 
+# Ladet das Kalibrierungsfoto und vergleicht es mit einer neuen Aufnahme
 def compare(self,msg):
 	camera = PiCamera()
 	camera.resolution = (640,480)
@@ -33,21 +35,23 @@ def compare(self,msg):
 	compare = rawCapture2.array
 
 	calibrate = cv2.imread("../resources/calibrate.jpg")
-
+	
+	# Beschraenkt die area of interest auf die Form
 	roiA = calibrate[130:460, 140:600]
 	roiB = compare[130:460, 140:600]
 
+	# Farbanpassung beider Aufnahmen
 	grayA = cv2.cvtColor(roiA, cv2.COLOR_BGR2GRAY)
 	grayA = cv2.GaussianBlur(grayA, (5,5), 0)
-
 	grayB = cv2.cvtColor(roiB, cv2.COLOR_BGR2GRAY)
 	grayB = cv2.GaussianBlur(grayB, (5,5), 0)
 
+	# Vergleich der Aufnahmen und Ausgabe der Veraenderung in Grautoenen
 	(score, diff) = compare_ssim(grayA, grayB, full=True)
 	diff = (diff * 255).astype("uint8")
-
+	
+	# Vergleichsbild speichern und Kamera schliessen
 	cv2.imwrite("../resources/difference.jpg", diff)
-
 	camera.close()
 
 	return score
