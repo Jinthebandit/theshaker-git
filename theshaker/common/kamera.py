@@ -30,14 +30,15 @@ class kamera:
 	def compare(self,msg):
 		camera = PiCamera()
 		camera.resolution = (640,480)
-
 		rawCapture2 = PiRGBArray(camera)
 		time.sleep(0.5)
-
 		camera.capture(rawCapture2, format="bgr")
 		compare = rawCapture2.array
+		cv2.imwrite("/home/pi/Pictures/compare.jpg", compare)
+		time.sleep(0.1)
 
 		calibrate = cv2.imread("/home/pi/Pictures/calibrate.jpg")
+		compare = cv2.imread("/home/pi/Pictures/compare.jpg")
 	
 		# Beschraenkt die area of interest auf die Form
 		roiA = calibrate[130:460, 140:600]
@@ -54,7 +55,6 @@ class kamera:
 		diff = (diff * 255).astype("uint8")
 	
 		# Vergleichsbild speichern und Kamera schliessen
-		cv2.imwrite("/home/pi/Pictures/compare.jpg", roiB)
 		cv2.imwrite("/home/pi/Pictures/difference.jpg", diff)
 		camera.close()
 		
