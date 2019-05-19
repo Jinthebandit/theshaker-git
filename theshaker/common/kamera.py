@@ -58,6 +58,7 @@ class kamera:
 		cv2.imwrite("/home/pi/Pictures/difference.jpg", diff)
 		camera.close()
 		
+		# MQTT Nachricht mit Score in Prozent und Fuellstand senden
 		client = mqtt.Client("")
 		client.connect(config.BROKER,config.PORT,60)
 		percent = round(score*100)
