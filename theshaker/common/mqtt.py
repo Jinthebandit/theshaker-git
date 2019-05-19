@@ -8,7 +8,7 @@ import paho.mqtt.client as mqtt
 # Local Imports
 from ..data.settings import config
 from .stepper import stepper
-import .kamera as kamera
+from .kamera import calibrate, compare
 
 # ---- MQTT Funktionen ----
 
