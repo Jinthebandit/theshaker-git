@@ -32,20 +32,24 @@ def on_message(client, userdata, msg):
 			getattr(globals()[topic](), message["mode"])(message) # topic.mode(payload) ausfuehren
 		except AttributeError:
 			print("Attribute Error")
-			
+
+# Verbindung zu Broker herstellen und endlos Loop starten.
+def connect():
+	# MQTT Verbindung als Client mit Broker herstellen
+	client = mqtt.Client("")
+
+	client.on_connect = on_connect
+	client.on_message = on_message
+
+	client.connect(config.BROKER, config.PORT, 60)
+
+	# MQTT Protokoll auf Nachrichten abhoeren
+	try:
+		client.loop_forever()
+	except KeyboardInterrupt:
+		client.disconnect()
+		print("MQTT disconnected")
 # ---- /MQTT Funktionen -----
 
-# MQTT Verbindung als Client mit Broker herstellen
-client = mqtt.Client("")
-
-client.on_connect = on_connect
-client.on_message = on_message
-
-client.connect(config.BROKER, config.PORT, 60)
-
-# MQTT Protokoll auf Nachrichten abhoeren
-try:
-	client.loop_forever()
-except KeyboardInterrupt:
-	client.disconnect()
-	print("MQTT disconnected")
+if(__name__ == "__main__"):
+	connect()
