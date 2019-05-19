@@ -63,6 +63,6 @@ class kamera:
 		percent = round(score*100)
 		full = 100-int(percent)
 		client.publish("pdp/score",percent)
-		client.publish("pdp/full",full)
+		client.publish("pdp/full","50")
 
 		return score
