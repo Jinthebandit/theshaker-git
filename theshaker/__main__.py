@@ -3,4 +3,4 @@
 # Library Imports
 
 # Local Imports
-from common.mqtt import mqtt
+from theshaker.common.mqtt import mqtt
