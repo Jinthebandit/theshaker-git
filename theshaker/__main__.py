@@ -3,4 +3,6 @@
 # Library Imports
 
 # Local Imports
-import theshaker.common.mqtt
+from theshaker.common.mqtt import connect
+
+connect()
