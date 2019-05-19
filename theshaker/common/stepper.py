@@ -24,12 +24,6 @@ def wait(flag):
 		if (stat & 0x20):
 			flag = 0
 
-# Motor stoppen und dann abstellen
-def off():
-	MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
-	wait(1)
-	MOTOR.stepperOFF(config.ADDR,config.MOTOR)
-
 class stepper:
 	def calibrate(self,msg):
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
@@ -48,9 +42,20 @@ class stepper:
 		client = mqtt.Client("")
 		client.connect(config.BROKER,config.PORT,60)
 		client.publish("pdp/status", "Stepper Kalibrierung abgeschlossen.")
-		
+
 	def movecw(self,msg):
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
 		wait(1)
 		MOTOR.stepperCONFIG(config.ADDR,config.MOTOR,"cw",config.RES,config.SPEED,0)
 		MOTOR.stepperMOVE(config.ADDR,config.MOTOR,msg["steps"])
+
+	# Motor stoppen und dann abstellen
+	def off(self):
+		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
+		wait(1)
+		MOTOR.stepperOFF(config.ADDR,config.MOTOR)
+
+		# MQTT Nachricht senden: Stepper Kalibrierung abgeschlossen
+		client = mqtt.Client("")
+		client.connect(config.BROKER,config.PORT,60)
+		client.publish("pdp/status", "Stepper ist abgestellt.")
