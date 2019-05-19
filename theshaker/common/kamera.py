@@ -1,4 +1,4 @@
-#! /Projects/camera.py python3
+#! /common/kamera.py python3
 
 import time
 import cv2
