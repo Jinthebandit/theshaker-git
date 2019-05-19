@@ -1,10 +1,13 @@
 #! /common/kamera.py python3
 
+# Library Imports
 import time
 import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 from skimage.measure import compare_ssim
+
+# Local Imports
 
 class kamera:
 	def calibrate(self,msg):
