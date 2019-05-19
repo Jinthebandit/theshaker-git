@@ -6,7 +6,6 @@ class config:
   PORT = 1883
   CHANNEL = "pdp"
   TOPICS = {"stepper": "stepper", "kamera": "kamera", "dc": "dc"}
-
   # ---- /MQTT Settings ----
 
   # ---- Stepper Settings ----
