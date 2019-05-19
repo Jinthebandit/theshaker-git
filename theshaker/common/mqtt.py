@@ -6,9 +6,9 @@ import json
 import paho.mqtt.client as mqtt
 
 # Local Imports
-from theshaker.data.settings import config
-from common.stepper import stepper
-from common.kamera import kamera
+from ..data.settings import config
+from .stepper import stepper
+from .kamera import kamera
 
 # ---- MQTT Funktionen ----
 
@@ -50,6 +50,3 @@ def connect():
 		client.disconnect()
 		print("MQTT disconnected")
 # ---- /MQTT Funktionen -----
-
-if(__name__ == "__main__"):
-	connect()
