@@ -1,3 +1,6 @@
 #! __main__.py python3
 
-print("test")
+# Library Imports
+
+# Local Imports
+import common.mqtt
