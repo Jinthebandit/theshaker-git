@@ -6,6 +6,7 @@ import cv2
 from picamera.array import PiRGBArray
 from picamera import PiCamera
 from skimage.measure import compare_ssim
+import paho.mqtt.client as mqtt
 
 # Local Imports
 
@@ -55,5 +56,8 @@ class kamera:
 		cv2.imwrite("/home/pi/Pictures/compare.jpg", roiB)
 		cv2.imwrite("/home/pi/Pictures/difference.jpg", diff)
 		camera.close()
+		
+		client = mqtt.Client("")
+		client.publish("pdp/score",score)
 
 		return score
