@@ -10,5 +10,6 @@ class config:
   # ---- /MQTT Settings ----
 
   # ---- Stepper Settings ----
-
+  ADDR = 0
+  MOTOR = "A"
   # ---- /Stepper Settings ----
