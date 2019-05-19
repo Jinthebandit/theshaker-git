@@ -25,6 +25,7 @@ def wait(flag):
 			flag = 0
 
 class stepper:
+	# Stepper mit Hilfe des Endstops kalibrieren und in neutrale Position fahren.
 	def calibrate(self,msg):
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
 		wait(1)
@@ -43,10 +44,11 @@ class stepper:
 		client.connect(config.BROKER,config.PORT,60)
 		client.publish("pdp/status", "Stepper Kalibrierung abgeschlossen.")
 
-	def movecw(self,msg):
+	# Stepper eine Anzahl an Steps bewegen
+	def move(self,msg):
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
 		wait(1)
-		MOTOR.stepperCONFIG(config.ADDR,config.MOTOR,"cw",config.RES,config.SPEED,0)
+		MOTOR.stepperCONFIG(config.ADDR,config.MOTOR,msg["dir"],config.RES,config.SPEED,0)
 		MOTOR.stepperMOVE(config.ADDR,config.MOTOR,msg["steps"])
 
 	# Motor stoppen und dann abstellen
