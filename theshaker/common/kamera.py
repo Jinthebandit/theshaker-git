@@ -6,7 +6,7 @@ from picamera.array import PiRGBArray
 from picamera import PiCamera
 from skimage.measure import compare_ssim
 
-class camera:
+class kamera:
 	def calibrate(self,msg):
 		camera = PiCamera()
 		camera.resolution = (640,480)
