@@ -12,14 +12,14 @@ from kamera import kamera
 
 # ---- MQTT Funktionen BEGINN ----
 
- # Nachricht bei erfolgreicher Verbindung mit MQTT Broker
+# Nachricht bei erfolgreicher Verbindung mit MQTT Broker
 def on_connect(client, userdata, flags, rc):
 	print("Verbunden als: " + str(client) + "\nFlags: " + str(flags) + " und Result Code: " + str(rc))
 
 	client.subscribe(str(config.CHANNEL + "/#")) # Alle Topics von config.CHANNEL abonnieren
 	print("Abonnierter Kanal: " + config.CHANNEL)
 
- # Bei neuer Nachricht in config.CHANNEL:
+# Bei neuer Nachricht in config.CHANNEL:
 def on_message(client, userdata, msg):
 	m_decode = str(msg.payload.decode("utf-8", "ignore")) # msg.payload dekodieren
 	message = json.loads(m_decode)
@@ -32,6 +32,8 @@ def on_message(client, userdata, msg):
 			getattr(globals()[topic](), message["mode"])(message) # topic.mode(payload) ausfuehren
 		except AttributeError:
 			print("Attribute Error")
+			
+# ---- MQTT Funktionen ENDE -----
 
 # MQTT Verbindung als Client mit Broker herstellen
 client = mqtt.Client("")
@@ -46,5 +48,3 @@ try:
 except KeyboardInterrupt:
 	client.disconnect()
 	print("MQTT disconnected")
-
-# ---- MQTT Funktionen ENDE -----
