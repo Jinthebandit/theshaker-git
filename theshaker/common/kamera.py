@@ -59,6 +59,6 @@ class kamera:
 		
 		client = mqtt.Client("")
 		client.connect("localhost",1883,60)
-		client.publish("pdp/score",score)
+		client.publish("pdp/score",round(score*100))
 
 		return score
