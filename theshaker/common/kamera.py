@@ -9,6 +9,7 @@ from skimage.measure import compare_ssim
 import paho.mqtt.client as mqtt
 
 # Local Imports
+from ..data.settings import config
 
 class kamera:
 	# Erstellt Foto zur Kalibrierung und speichert es zur spaeteren Verwendung
@@ -58,7 +59,8 @@ class kamera:
 		camera.close()
 		
 		client = mqtt.Client("")
-		client.connect("localhost",1883,60)
+		client.connect(config.BROKER,config.PORT,60)
 		client.publish("pdp/score",round(score*100))
+		client.publish("pdp/full",80-round(score*100))
 
 		return score
