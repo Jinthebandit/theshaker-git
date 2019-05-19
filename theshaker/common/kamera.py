@@ -35,7 +35,7 @@ class kamera:
 		camera.capture(rawCapture2, format="bgr")
 		compare = rawCapture2.array
 
-		calibrate = cv2.imread("../resources/calibrate.jpg")
+		calibrate = cv2.imread("/home/pi/Pictures/calibrate.jpg")
 	
 		# Beschraenkt die area of interest auf die Form
 		roiA = calibrate[130:460, 140:600]
@@ -52,7 +52,7 @@ class kamera:
 		diff = (diff * 255).astype("uint8")
 	
 		# Vergleichsbild speichern und Kamera schliessen
-		cv2.imwrite("../resources/difference.jpg", diff)
+		cv2.imwrite("/home/pi/Pictures/difference.jpg", diff)
 		camera.close()
 
 		return score
