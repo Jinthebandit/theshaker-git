@@ -53,4 +53,4 @@ class stepper:
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
 		wait(1)
 		MOTOR.stepperCONFIG(config.ADDR,config.MOTOR,"cw",config.RES,config.SPEED,0)
-		MOTOR.stepperMOVE(config.ADDR,config.MOTOR,msg["steps"]
+		MOTOR.stepperMOVE(config.ADDR,config.MOTOR,msg["steps"])
