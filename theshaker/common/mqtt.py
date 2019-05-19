@@ -10,7 +10,7 @@ from ..data.settings import config
 from stepper import stepper
 from kamera import kamera
 
-# ---- MQTT Funktionen BEGINN ----
+# ---- MQTT Funktionen ----
 
 # Nachricht bei erfolgreicher Verbindung mit MQTT Broker
 def on_connect(client, userdata, flags, rc):
@@ -33,7 +33,7 @@ def on_message(client, userdata, msg):
 		except AttributeError:
 			print("Attribute Error")
 			
-# ---- MQTT Funktionen ENDE -----
+# ---- /MQTT Funktionen -----
 
 # MQTT Verbindung als Client mit Broker herstellen
 client = mqtt.Client("")
@@ -43,6 +43,7 @@ client.on_message = on_message
 
 client.connect(config.BROKER, config.PORT, 60)
 
+# MQTT Protokoll auf Nachrichten abhoeren
 try:
 	client.loop_forever()
 except KeyboardInterrupt:
