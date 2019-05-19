@@ -1,4 +1,4 @@
-#! /data/config.py python3
+#! /data/settings.py python3
 
 class config:
   # ---- MQTT Settings ----
