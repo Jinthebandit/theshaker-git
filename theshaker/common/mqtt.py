@@ -9,6 +9,7 @@ import paho.mqtt.client as mqtt
 from ..data.settings import config
 from .stepper import stepper
 from .kamera import kamera
+from .dc import dc
 
 # ---- MQTT Funktionen ----
 
