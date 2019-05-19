@@ -60,11 +60,11 @@ class kamera:
 		
 		# MQTT Nachricht mit Score in Prozent und Fuellstand senden
 		percent = round(score*100)
-		full = 100-int(percent)
+		load = 100-int(percent)
 		client = mqtt.Client("")
 		client.connect(config.BROKER,config.PORT,60)
 		client.publish("pdp/score",percent)
 		time.sleep(0.1)
-		client.publish("pdp/full",full)
+		client.publish("pdp/load",load)
 
 		return score
