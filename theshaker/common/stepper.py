@@ -9,13 +9,13 @@ from ..data.settings import config
 
 def endstop(flag):
 	while(flag):
-		stat=MOTOR.getSENSORS(0)
+		stat=MOTOR.getSENSORS(config.ADDR)
 		if not (stat & 0x1):
 			flag = 0
 			
 def wait(flag):
 	while(flag):
-		stat = MOTOR.getINTflag0(0)
+		stat = MOTOR.getINTflag0(config.ADDR)
 		if (stat & 0x20):
 			flag = 0
 			
