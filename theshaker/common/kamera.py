@@ -21,7 +21,7 @@ class kamera:
 		camera.capture(rawCapture1, format="bgr")
 		calibrate = rawCapture1.array
 
-		cv2.imwrite("calibrate.jpg", calibrate)
+		cv2.imwrite("/home/pi/Pictures/calibrate.jpg", calibrate)
 		camera.close()
 
 	# Ladet das Kalibrierungsfoto und vergleicht es mit einer neuen Aufnahme
