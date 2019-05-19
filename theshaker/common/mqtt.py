@@ -6,9 +6,9 @@ import json
 import paho.mqtt.client as mqtt
 
 # Local Imports
-from ..data.settings import config
-from .stepper import stepper
-from .kamera import kamera
+from theshaker.data.settings import config
+from common.stepper import stepper
+from common.kamera import kamera
 
 # ---- MQTT Funktionen ----
 
