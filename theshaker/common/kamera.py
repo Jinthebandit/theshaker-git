@@ -52,6 +52,7 @@ class kamera:
 		diff = (diff * 255).astype("uint8")
 	
 		# Vergleichsbild speichern und Kamera schliessen
+		cv2.imwrite("/home/pi/Pictures/compare.jpg", compare)
 		cv2.imwrite("/home/pi/Pictures/difference.jpg", diff)
 		camera.close()
 
