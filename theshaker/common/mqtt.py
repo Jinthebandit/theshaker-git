@@ -1,5 +1,4 @@
-#! /Projects/mqtt.py python3
-#! config.py muss im selben Verzeichnis sein
+#! /common/mqtt.py python3
 
 # Standard Library Imports
 import time
@@ -8,8 +7,8 @@ import paho.mqtt.client as mqtt
 
 # Local Imports
 import config
-from stepper import *
-from kamera import *
+from stepper import stepper
+from kamera import kamera
 
 # ---- MQTT Funktionen BEGINN ----
 
