@@ -1,7 +1,7 @@
-#! /Projects/stepper.py python3
+#! /common/stepper.py python3
 
 import time
-import config
+from ..data.settings import config
 
 class stepper:
 	def start(self,msg):
