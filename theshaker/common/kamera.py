@@ -61,6 +61,7 @@ class kamera:
 		client = mqtt.Client("")
 		client.connect(config.BROKER,config.PORT,60)
 		percent = round(score*100)
+		full = 100-int(percent)
 		client.publish("pdp/score",percent)
 		client.publish("pdp/full",100-percent)
 
