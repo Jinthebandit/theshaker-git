@@ -61,6 +61,6 @@ class kamera:
 		client = mqtt.Client("")
 		client.connect(config.BROKER,config.PORT,60)
 		client.publish("pdp/score",round(score*100))
-		client.publish("pdp/full",80-round(score*100))
+		client.publish("pdp/full",100-round(score*100))
 
 		return score
