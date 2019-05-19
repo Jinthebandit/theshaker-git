@@ -47,7 +47,7 @@ class stepper:
 		# MQTT Nachricht senden: Stepper Kalibrierung abgeschlossen
 		client = mqtt.Client("")
 		client.connect(config.BROKER,config.PORT,60)
-		client.publish("pdp/stepper", "Stepper Kalibrierung abgeschlossen.")
+		client.publish("pdp/status", "Stepper Kalibrierung abgeschlossen.")
 		
 	def movecw(self,msg):
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
