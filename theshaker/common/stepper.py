@@ -8,7 +8,7 @@ import paho.mqtt.client as mqtt
 from ..data.settings import config
 
 
-# Funktion fuer Endstop: wenn Endstop erreicht -> Motor stoppen
+# Endstop function: stop stepper when endstop is reached
 def endstop(flag):
     while flag:
         stat = MOTOR.getSENSORS(config.ADDR)
@@ -17,7 +17,7 @@ def endstop(flag):
     MOTOR.stepperSTOP(config.ADDR, config.MOTOR)
 
 
-# Warten bis der Motor seine endgueltige Geschwindigkeit erreicht hat
+# Wait for stepper to reach driving speed
 def wait(flag):
     MOTOR.enablestepSTOPint(config.ADDR, config.MOTOR)
     while flag:
@@ -27,7 +27,7 @@ def wait(flag):
 
 
 class stepper:
-    # Stepper mit Hilfe des Endstops kalibrieren und in neutrale Position fahren.
+    # Calibrate stepper by driving it to the endstop and then into a neutral position
     def calibrate(self, msg):
         MOTOR.stepperSTOP(config.ADDR, config.MOTOR)
         MOTOR.stepperCONFIG(config.ADDR, config.MOTOR, "ccw", "M8", 500, 0)
@@ -40,24 +40,24 @@ class stepper:
         MOTOR.stepperMOVE(config.ADDR, config.MOTOR, 200)
         wait(1)
 
-        # MQTT Nachricht senden: Stepper Kalibrierung abgeschlossen
+        # Send MQTT message: stepper calibration finished.
         client = mqtt.Client("")
         client.connect(config.BROKER, config.PORT, 60)
         client.publish("pdp/status", "Stepper Kalibrierung abgeschlossen.")
 
-    # Stepper eine Anzahl an Steps bewegen
+    # Move stepper a number of steps
     def move(self, msg):
         MOTOR.stepperSTOP(config.ADDR, config.MOTOR)
         MOTOR.stepperCONFIG(config.ADDR, config.MOTOR, msg["dir"], config.RES, config.SPEED, 0)
         MOTOR.stepperMOVE(config.ADDR, config.MOTOR, msg["steps"])
         wait(1)
 
-    # Motor stoppen und dann abstellen
+    # Stop and turn off stepper
     def off(self, msg):
         MOTOR.stepperSTOP(config.ADDR, config.MOTOR)
         MOTOR.stepperOFF(config.ADDR, config.MOTOR)
 
-        # MQTT Nachricht senden: Stepper Kalibrierung abgeschlossen
+        # Send MQTT message: stepper is turned off
         client = mqtt.Client("")
         client.connect(config.BROKER, config.PORT, 60)
         client.publish("pdp/status", "Stepper ist abgestellt.")
