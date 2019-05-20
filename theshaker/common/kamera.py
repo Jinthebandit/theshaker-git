@@ -13,7 +13,7 @@ from ..data.settings import config
 
 
 class kamera:
-    # Erstellt Foto zur Kalibrierung und speichert es zur spaeteren Verwendung
+    # Take a picture with the camera and save it
     def calibrate(self, msg):
         camera = PiCamera()
         camera.resolution = (640, 480)
@@ -28,7 +28,7 @@ class kamera:
         cv2.imwrite('/home/pi/Pictures/calibrate.jpg', calibrate)
         camera.close()
 
-    # Ladet das Kalibrierungsfoto und vergleicht es mit einer neuen Aufnahme
+    # Load the calibration picture and compare it with a new picture
     def compare(self, msg):
         camera = PiCamera()
         camera.resolution = (640, 480)
@@ -43,26 +43,26 @@ class kamera:
         calibrate = cv2.imread('/home/pi/Pictures/calibrate.jpg')
         compare = cv2.imread('/home/pi/Pictures/compare.jpg')
 
-        # Beschraenkt die area of interest auf die Form. Region of Interest [y1:y2, x1:x2]
+        # Region of Interest [y1:y2, x1:x2]
         roiA = calibrate[100:370, 70:550]
         roiB = compare[100:370, 70:550]
 
-        # Farbanpassung beider Aufnahmen
+        # Color correction
         grayA = cv2.cvtColor(roiA, cv2.COLOR_BGR2GRAY)
         # grayA = cv2.GaussianBlur(grayA, (5,5), 0)
         grayB = cv2.cvtColor(roiB, cv2.COLOR_BGR2GRAY)
         # grayB = cv2.GaussianBlur(grayB, (5,5), 0)
 
-        # Vergleich der Aufnahmen und Ausgabe der Veraenderung in Grautoenen
+        # Compare the images, return difference and score (score of 1 = no difference)
         (score, diff) = compare_ssim(grayA, grayB, full=True)
         diff = (diff * 255).astype('uint8')
 
-        # Vergleichsbild speichern und Kamera schliessen
+        # Save difference image and compare image
         cv2.imwrite('/home/pi/Pictures/difference.jpg', diff)
         cv2.imwrite('/home/pi/Pictures/compare.jpg', grayB)
         camera.close()
 
-        # MQTT Nachricht mit Score in Prozent und Fuellstand senden
+        # Send MQTT message containing the difference in percent and the load status of the form
         percent = round(score * 100)
         load = 100 - int(percent)
         client = mqtt.Client('')
