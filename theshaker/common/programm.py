@@ -6,6 +6,8 @@ import json
 import paho.mqtt.client as mqtt
 
 # Local Imports
+from .stepper import stepper
+from .kamera import kamera
 from ..data.settings import config
 
 client = mqtt.Client("")
@@ -20,3 +22,14 @@ class prg:
         client.publish("pdp/stepper", json.dumps({ "mode": "move", "dir": "cw", "steps": 40 }))
         time.sleep(0.5)
         client.publish("pdp/kamera", json.dumps({ "mode": "compare" }))
+
+    def prg2(self,msg):
+        stepper.calibrate(1)
+        kamera.calibrate(1)
+        time.sleep(5)
+        kamera.compare(1)
+        time.sleep(5)
+        stepper.move(json.dumps({ "dir": "cw", "steps": 40 }))
+        kamera.compare(1)
+        time.sleep(5)
+        stepper.off(1)
