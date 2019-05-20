@@ -14,7 +14,7 @@ def endstop(flag):
 		stat=MOTOR.getSENSORS(config.ADDR)
 		if not (stat & 0x1):
 			flag = 0
-	Motor.stepperSTOP(config.ADDR,config.MOTOR)
+	MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
 
 # Warten bis der Motor seine endgueltige Geschwindigkeit erreicht hat
 def wait(flag):
