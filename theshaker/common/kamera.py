@@ -16,6 +16,7 @@ class kamera:
 	def calibrate(self,msg):
 		camera = PiCamera()
 		camera.resolution = (640,480)
+		camera.rotation = 90
 
 		rawCapture1 = PiRGBArray(camera)
 		time.sleep(0.5)
@@ -30,6 +31,7 @@ class kamera:
 	def compare(self,msg):
 		camera = PiCamera()
 		camera.resolution = (640,480)
+		camera.rotation = 90
 		rawCapture2 = PiRGBArray(camera)
 		time.sleep(0.5)
 		camera.capture(rawCapture2, format="bgr")
