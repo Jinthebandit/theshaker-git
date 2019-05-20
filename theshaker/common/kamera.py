@@ -47,13 +47,13 @@ class kamera:
 		roiB = compare[110:360, 100:550]
 
 		# Farbanpassung beider Aufnahmen
-#		grayA = cv2.cvtColor(roiA, cv2.COLOR_BGR2GRAY)
-		grayA = cv2.GaussianBlur(roiA, (5,5), 0)
-#		grayB = cv2.cvtColor(roiB, cv2.COLOR_BGR2GRAY)
-		grayB = cv2.GaussianBlur(roiB, (5,5), 0)
+		#grayA = cv2.cvtColor(roiA, cv2.COLOR_BGR2GRAY)
+		#grayA = cv2.GaussianBlur(roiA, (5,5), 0)
+		#grayB = cv2.cvtColor(roiB, cv2.COLOR_BGR2GRAY)
+		#grayB = cv2.GaussianBlur(roiB, (5,5), 0)
 
 		# Vergleich der Aufnahmen und Ausgabe der Veraenderung in Grautoenen
-		(score, diff) = compare_ssim(grayA, grayB, full=True)
+		(score, diff) = compare_ssim(roiA, roiB, full=True)
 		diff = (diff * 255).astype("uint8")
 	
 		# Vergleichsbild speichern und Kamera schliessen
