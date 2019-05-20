@@ -34,5 +34,7 @@ class prg:
         time.sleep(5)
         stepper().move({ "dir": "cw", "steps": 40 })
         kamera().compare(1)
-        time.sleep(5)
+        time.sleep(5)        
+        stepper().move({ "dir": "ccw", "steps": 40 })
+        kamera().compare(1)
         stepper().off(1)
