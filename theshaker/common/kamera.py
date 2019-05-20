@@ -21,7 +21,7 @@ class kamera:
 		rawCapture1 = PiRGBArray(camera)
 		time.sleep(0.5)
 
-		camera.capture(rawCapture1, format="bgr")
+		camera.capture(rawCapture1, format="rgb")
 		calibrate = rawCapture1.array
 
 		cv2.imwrite("/home/pi/Pictures/calibrate.jpg", calibrate)
@@ -34,7 +34,7 @@ class kamera:
 		camera.rotation = 90
 		rawCapture2 = PiRGBArray(camera)
 		time.sleep(0.5)
-		camera.capture(rawCapture2, format="bgr")
+		camera.capture(rawCapture2, format="rgb")
 		compare = rawCapture2.array
 		cv2.imwrite("/home/pi/Pictures/compare.jpg", compare)
 		time.sleep(0.1)
