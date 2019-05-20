@@ -10,7 +10,6 @@ from ..data.settings import config
 
 # Funktion fuer Endstop: wenn Endstop erreicht -> Motor stoppen
 def endstop(flag):
-	print("endstop")
 	while(flag):
 		stat=MOTOR.getSENSORS(config.ADDR)
 		if not (stat & 0x1):
@@ -19,7 +18,6 @@ def endstop(flag):
 
 # Warten bis der Motor seine endgueltige Geschwindigkeit erreicht hat
 def wait(flag):
-	print("wait")
 	MOTOR.enablestepSTOPint(config.ADDR,config.MOTOR)
 	while(flag):
 		stat = MOTOR.getINTflag0(config.ADDR)
