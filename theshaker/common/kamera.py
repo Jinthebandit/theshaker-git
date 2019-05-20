@@ -39,8 +39,8 @@ class kamera:
 		cv2.imwrite("/home/pi/Pictures/compare.jpg", compare)
 		time.sleep(0.1)
 
-		calibrate = cv2.imread("/home/pi/Pictures/calibrate.jpg")
-		compare = cv2.imread("/home/pi/Pictures/compare.jpg")
+		calibrate = cv2.imread("/home/pi/Pictures/calibrate.jpg", mode="RGB")
+		compare = cv2.imread("/home/pi/Pictures/compare.jpg", mode="RGB")
 	
 		# Beschraenkt die area of interest auf die Form. Region of Interest [y1:y2, x1:x2]
 		roiA = calibrate[110:360, 100:550]
@@ -53,7 +53,7 @@ class kamera:
 		grayB = cv2.GaussianBlur(grayB, (5,5), 0)
 
 		# Vergleich der Aufnahmen und Ausgabe der Veraenderung in Grautoenen
-		(score, diff) = compare_ssim(grayA, grayB, full=True)
+		(score, diff) = compare_ssim(calibrate, compare, full=True)
 		diff = (diff * 255).astype("uint8")
 	
 		# Vergleichsbild speichern und Kamera schliessen
