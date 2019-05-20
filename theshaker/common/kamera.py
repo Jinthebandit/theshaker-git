@@ -58,6 +58,7 @@ class kamera:
 	
 		# Vergleichsbild speichern und Kamera schliessen
 		cv2.imwrite("/home/pi/Pictures/difference.jpg", diff)
+		cv2.imwrite("/home/pi/Pictures/compare.jpg", grayB)
 		camera.close()
 		
 		# MQTT Nachricht mit Score in Prozent und Fuellstand senden
