@@ -14,6 +14,9 @@ client = mqtt.Client("")
 client.connect(config.BROKER,config.PORT,60)
 
 class prg:
+    def __init__(self):
+        print("Programme")
+        
     def prg1(self,msg):
         client.publish("pdp/stepper", json.dumps({ "mode": "calibrate" }))
         time.sleep(1)
@@ -24,12 +27,7 @@ class prg:
         client.publish("pdp/kamera", json.dumps({ "mode": "compare" }))
 
     def prg2(self,msg):
-        print("prg2")
-        try:
-            stepper.calibrate(" ",1)
-        except Exception as e:
-            print(e)
-        print("continue")
+        stepper().calibrate(1)
         kamera.calibrate()
         time.sleep(5)
         kamera.compare()
