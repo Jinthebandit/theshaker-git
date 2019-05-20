@@ -11,6 +11,7 @@ from .kamera import kamera
 from .dc import dc
 from .programm import prg
 
+print('test')
 
 # ---- MQTT functions ----
 
