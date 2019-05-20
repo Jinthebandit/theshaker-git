@@ -32,7 +32,7 @@ class prg:
         time.sleep(5)
         kamera().compare(1)
         time.sleep(5)
-        stepper.move(" ",json.dumps({ "dir": "cw", "steps": 40 }))
+        stepper().move({ "dir": "cw", "steps": 40 })
         kamera().compare(1)
         time.sleep(5)
         stepper().off(1)
