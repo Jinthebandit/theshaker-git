@@ -27,8 +27,8 @@ class prg:
         print("prg2")
         try:
             stepper.calibrate()
-        except:
-            print("error")
+        except Exception as e:
+            print(e)
         print("continue")
         kamera.calibrate()
         time.sleep(5)
