@@ -16,12 +16,12 @@ from .programm import prg
 
 # Message upon connection with MQTT broker
 def on_connect(client, flags, rc):
-    print(f'Verbunden als: {str(client)}')
-    print(f'\nFlags: {str(flags)}')
-    print(f'Result Code: {str(rc)}')
+    print('Verbunden als: {}'.format(str(client)))
+    print('\nFlags: {}'.format(str(flags)))
+    print('Result Code: {}'.format(str(rc)))
 
-    client.subscribe(str(config.CHANNEL + "/#"))  # Subscribe to all topics in "pdp" channel
-    print(f'Abonnierter Kanal: {config.CHANNEL}')
+    client.subscribe(str(config.CHANNEL + '/#'))  # Subscribe to all topics in "pdp" channel
+    print('Abonnierter Kanal: {}'.format(config.CHANNEL))
 
 
 # On new message in "pdp" channel
