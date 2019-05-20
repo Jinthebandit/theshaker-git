@@ -25,12 +25,16 @@ class prg:
 
     def prg2(self,msg):
         print("prg2")
-        stepper.calibrate("1")
-        kamera.calibrate("1")
+        try:
+            stepper.calibrate()
+        except:
+            print("error")
+        print("continue")
+        kamera.calibrate()
         time.sleep(5)
-        kamera.compare("1")
+        kamera.compare()
         time.sleep(5)
         stepper.move(json.dumps({ "dir": "cw", "steps": 40 }))
-        kamera.compare("1")
+        kamera.compare()
         time.sleep(5)
-        stepper.off("1")
+        stepper.off()
