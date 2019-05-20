@@ -49,7 +49,7 @@ class stepper:
 		MOTOR.stepperMOVE(config.ADDR,config.MOTOR,msg["steps"])
 
 	# Motor stoppen und dann abstellen
-	def off(self):
+	def off(self,msg):
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
 		MOTOR.stepperOFF(config.ADDR,config.MOTOR)
 
