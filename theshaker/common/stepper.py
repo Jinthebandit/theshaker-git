@@ -36,6 +36,7 @@ class stepper:
 		wait(1)
 		MOTOR.stepperCONFIG(config.ADDR,config.MOTOR,"ccw","M8",800,0)
 		MOTOR.stepperMOVE(config.ADDR,config.MOTOR,200)
+		wait(1)
 		
 		# MQTT Nachricht senden: Stepper Kalibrierung abgeschlossen
 		client = mqtt.Client("")
@@ -47,6 +48,7 @@ class stepper:
 		MOTOR.stepperSTOP(config.ADDR,config.MOTOR)
 		MOTOR.stepperCONFIG(config.ADDR,config.MOTOR,msg["dir"],config.RES,config.SPEED,0)
 		MOTOR.stepperMOVE(config.ADDR,config.MOTOR,msg["steps"])
+		wait(1)
 
 	# Motor stoppen und dann abstellen
 	def off(self,msg):
