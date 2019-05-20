@@ -16,15 +16,6 @@ client.connect(config.BROKER,config.PORT,60)
 class prg:
     def __init__(self):
         print("Programme")
-        
-    def prg1(self,msg):
-        client.publish("pdp/stepper", json.dumps({ "mode": "calibrate" }))
-        time.sleep(1)
-        client.publish("pdp/kamera", json.dumps({ "mode": "calibrate" }))
-        time.sleep(0.5)
-        client.publish("pdp/stepper", json.dumps({ "mode": "move", "dir": "cw", "steps": 40 }))
-        time.sleep(0.5)
-        client.publish("pdp/kamera", json.dumps({ "mode": "compare" }))
 
     def prg2(self,msg):
         stepper().calibrate(1)
