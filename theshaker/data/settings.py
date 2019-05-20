@@ -5,7 +5,7 @@ class config:
   BROKER = "localhost"
   PORT = 1883
   CHANNEL = "pdp"
-  TOPICS = {"stepper": "stepper", "kamera": "kamera", "dc": "dc"}
+  TOPICS = { "stepper": "stepper", "kamera": "kamera", "dc": "dc", "servo": "servo", "prg": "prg" }
   # ---- /MQTT Settings ----
 
   # ---- Stepper Settings ----
