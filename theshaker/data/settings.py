@@ -11,4 +11,6 @@ class config:
   # ---- Stepper Settings ----
   ADDR = 0
   MOTOR = "A"
+  RES = "M8"
+  SPEED = 500
   # ---- /Stepper Settings ----
