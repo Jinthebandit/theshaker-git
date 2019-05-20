@@ -28,7 +28,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 # On new message in "pdp" channel
-def on_message(msg):
+def on_message(client, userdata, msg):
     m_decode = str(msg.payload.decode('utf-8', 'ignore'))  # Decode msg.payload
     message = json.loads(m_decode)
 
