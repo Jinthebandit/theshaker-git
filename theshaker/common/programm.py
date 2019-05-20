@@ -28,11 +28,11 @@ class prg:
 
     def prg2(self,msg):
         stepper().calibrate(1)
-        kamera.calibrate()
+        kamera().calibrate(1)
         time.sleep(5)
-        kamera.compare()
+        kamera().compare(1)
         time.sleep(5)
-        stepper.move(json.dumps({ "dir": "cw", "steps": 40 }))
-        kamera.compare()
+        stepper().move(json.dumps({ "dir": "cw", "steps": 40 }))
+        kamera().compare(1)
         time.sleep(5)
-        stepper.off()
+        stepper().off(1)
