@@ -24,12 +24,13 @@ class prg:
         client.publish("pdp/kamera", json.dumps({ "mode": "compare" }))
 
     def prg2(self,msg):
-        stepper.calibrate(1)
-        kamera.calibrate(1)
+        print("prg2")
+        stepper.calibrate("1")
+        kamera.calibrate("1")
         time.sleep(5)
-        kamera.compare(1)
+        kamera.compare("1")
         time.sleep(5)
         stepper.move(json.dumps({ "dir": "cw", "steps": 40 }))
-        kamera.compare(1)
+        kamera.compare("1")
         time.sleep(5)
-        stepper.off(1)
+        stepper.off("1")
