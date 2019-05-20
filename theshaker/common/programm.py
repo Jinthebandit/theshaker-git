@@ -38,7 +38,7 @@ class prg:
         stepper().move({ "dir": "ccw", "steps": 40 })
         score = kamera().compare(1)
         if score >= 0.6:
-            print("mehr Steine: " + score)
+            print("mehr Steine: " + str(score))
         else:
-            print(score)
+            print(str(score))
         stepper().off(1)
