@@ -10,6 +10,7 @@ from ..data.settings import config
 from .stepper import stepper
 from .kamera import kamera
 from .dc import dc
+from .programm import prg
 
 # ---- MQTT Funktionen ----
 
