@@ -43,8 +43,8 @@ class kamera:
 		compare = cv2.imread("/home/pi/Pictures/compare.jpg")
 	
 		# Beschraenkt die area of interest auf die Form. Region of Interest [y1:y2, x1:x2]
-		roiA = calibrate[110:360, 100:550]
-		roiB = compare[110:360, 100:550]
+		roiA = calibrate[100:370, 70:550]
+		roiB = compare[100:370, 70:550]
 
 		# Farbanpassung beider Aufnahmen
 		grayA = cv2.cvtColor(roiA, cv2.COLOR_BGR2GRAY)
