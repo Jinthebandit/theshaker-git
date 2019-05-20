@@ -13,10 +13,11 @@ from .programm import prg
 
 print('test')
 
+
 # ---- MQTT functions ----
 
 # Message upon connection with MQTT broker
-def on_connect(client, flags, rc):
+def on_connect(client, userdata, flags, rc):
     print('test3')
     print('Verbunden als: {}'.format(str(client)))
     print('\nFlags: {}'.format(str(flags)))
@@ -40,9 +41,9 @@ def on_message(msg):
 
 # Establish connection with MQTT broker and listen
 def connect():
-    print('test2')
+    print('test2: {}'.format(config.BROKER))
     # Connect to MQTT broker
-    client = mqtt.Client("")
+    client = mqtt.Client(' ')
 
     client.on_connect = on_connect
     client.on_message = on_message
