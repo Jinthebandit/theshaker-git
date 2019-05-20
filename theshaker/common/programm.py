@@ -26,7 +26,7 @@ class prg:
     def prg2(self,msg):
         print("prg2")
         try:
-            stepper.calibrate()
+            stepper.calibrate(" ",1)
         except Exception as e:
             print(e)
         print("continue")
