@@ -37,7 +37,7 @@ class kamera:
         time.sleep(0.5)
         camera.capture(raw_capture2, format="bgr")
         compare = raw_capture2.array
-        cv2.imwrite("/home/pi/Pictures/compare.jpg", compare)
+        cv2.imwrite('/home/pi/Pictures/compare.jpg', compare)
         time.sleep(0.1)
 
         calibrate = cv2.imread('/home/pi/Pictures/calibrate.jpg')
@@ -65,7 +65,7 @@ class kamera:
         # MQTT Nachricht mit Score in Prozent und Fuellstand senden
         percent = round(score * 100)
         load = 100 - int(percent)
-        client = mqtt.Client("")
+        client = mqtt.Client('')
         client.connect(config.BROKER, config.PORT, 60)
         client.publish('pdp/score', percent)
         time.sleep(0.1)
