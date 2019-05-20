@@ -1,7 +1,6 @@
 #! /common/mqtt.py python3
 
 # Standard Library Imports
-import time
 import json
 import paho.mqtt.client as mqtt
 
@@ -12,43 +11,45 @@ from .kamera import kamera
 from .dc import dc
 from .programm import prg
 
-# ---- MQTT Funktionen ----
 
-# Nachricht bei erfolgreicher Verbindung mit MQTT Broker
-def on_connect(client, userdata, flags, rc):
-	print("Verbunden als: " + str(client) + "\nFlags: " + str(flags) + " und Result Code: " + str(rc))
+# ---- MQTT functions ----
 
-	client.subscribe(str(config.CHANNEL + "/#")) # Alle Topics von config.CHANNEL abonnieren
-	print("Abonnierter Kanal: " + config.CHANNEL)
+# Message upon connection with MQTT broker
+def on_connect(client, flags, rc):
+    print(f'Verbunden als: {str(client)}')
+    print(f'\nFlags: {str(flags)}')
+    print(f'Result Code: {str(rc)}')
 
-# Bei neuer Nachricht in config.CHANNEL:
-def on_message(client, userdata, msg):
-	m_decode = str(msg.payload.decode("utf-8", "ignore")) # msg.payload dekodieren
-	message = json.loads(m_decode)
+    client.subscribe(str(config.CHANNEL + "/#"))  # Subscribe to all topics in "pdp" channel
+    print(f'Abonnierter Kanal: {config.CHANNEL}')
 
-	myString = str(msg.topic)
-	channel, topic = myString.split("/", 1)
 
-	if topic in config.TOPICS:
-		try:
-			getattr(globals()[topic](), message["mode"])(message) # topic.mode(payload) ausfuehren
-		except AttributeError:
-			print("Attribute Error")
+# On new message in "pdp" channel
+def on_message(msg):
+    m_decode = str(msg.payload.decode('utf-8', 'ignore'))  # Decode msg.payload
+    message = json.loads(m_decode)
 
-# Verbindung zu Broker herstellen und endlos Loop starten.
+    my_string = str(msg.topic)
+    channel, topic = my_string.split('/', 1)
+
+    if topic in config.TOPICS:
+        getattr(globals()[topic](), message['mode'])(message)  # Execute topic.mode(payload)
+
+
+# Establish connection with MQTT broker and listen
 def connect():
-	# MQTT Verbindung als Client mit Broker herstellen
-	client = mqtt.Client("")
+    # Connect to MQTT broker
+    client = mqtt.Client("")
 
-	client.on_connect = on_connect
-	client.on_message = on_message
+    client.on_connect = on_connect
+    client.on_message = on_message
 
-	client.connect(config.BROKER, config.PORT, 60)
+    client.connect(config.BROKER, config.PORT, 60)
 
-	# MQTT Protokoll auf Nachrichten abhoeren
-	try:
-		client.loop_forever()
-	except KeyboardInterrupt:
-		client.disconnect()
-		print("MQTT disconnected")
-# ---- /MQTT Funktionen -----
+    # Listen on MQTT protocol in endless loop
+    try:
+        client.loop_forever()
+    except KeyboardInterrupt:
+        client.disconnect()
+        print('MQTT disconnected')
+# ---- /MQTT functions -----
