@@ -66,6 +66,8 @@ class kamera:
         percent = round((score-0.27) * 139)
         if percent > 100:
             percent = 100
+        if percent < 0:
+            percent = 0
         load = 100 - int(percent)
         client = mqtt.Client('')
         client.connect(config.BROKER, config.PORT, 60)
