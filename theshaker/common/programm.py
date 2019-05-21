@@ -48,9 +48,8 @@ class prg:
         load = kamera().compare(1)
 
         if load <= 95:
-            print('mehr Steine: {}'.format(load))
             prg().recursive(0)
         else:
-            print(load)
+            stepper().neutral(1)
             stepper().off(1)
             client.publish("pdp/finished", True)
