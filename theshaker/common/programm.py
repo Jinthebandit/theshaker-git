@@ -11,8 +11,6 @@ from .servo import servo
 from .dc import dc
 from ..data.settings import config
 
-client = mqtt.Client('')
-client.connect(config.BROKER, config.PORT, 60)
 
 class prg:
     def __init__(self):
@@ -58,10 +56,16 @@ class prg:
         stepper().calibrate(1)
         load = kamera().compare(1)
 
-        if load < 92:
+        if load < 91:
             prg().recursive(load)
         else:
+            client1 = mqtt.Client('')
+            client1.connect(config.BROKER, config.PORT, 60)
+            print('1')
             stepper().neutral(1)
-            stepper().off(1)
             time.sleep(0.5)
-            client.publish("pdp/finished", 'Das Programm wurde erfolgreich beendet.')
+            print('2')
+            stepper().off(1)
+            print('3')
+            client1.publish("pdp/finished", 'Das Programm wurde erfolgreich beendet.')
+            client1.disconnect()
