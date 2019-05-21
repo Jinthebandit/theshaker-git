@@ -60,14 +60,8 @@ class stepper:
         MOTOR.stepperCONFIG(config.ADDR, config.MOTOR, 'cw', 'M8', 1000, 0)
         MOTOR.stepperMOVE(config.ADDR, config.MOTOR, 300)
         wait(1)
-        print('neutral')
 
     # Stop and turn off stepper
     def off(self, msg):
         MOTOR.stepperSTOP(config.ADDR, config.MOTOR)
         MOTOR.stepperOFF(config.ADDR, config.MOTOR)
-
-        # Send MQTT message: stepper is turned off
-        client = mqtt.Client("")
-        client.connect(config.BROKER, config.PORT, 60)
-        client.publish('pdp/status', 'Stepper ist abgestellt.')
