@@ -61,11 +61,8 @@ class prg:
         else:
             client1 = mqtt.Client('')
             client1.connect(config.BROKER, config.PORT, 60)
-            print('1')
             stepper().neutral(1)
             time.sleep(0.5)
-            print('2')
             stepper().off(1)
-            print('3')
             client1.publish("pdp/finished", 'Das Programm wurde erfolgreich beendet.')
             client1.disconnect()
