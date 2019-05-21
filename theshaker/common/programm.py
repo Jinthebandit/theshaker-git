@@ -43,7 +43,7 @@ class prg:
         time.sleep(5)
         dc().stop({'motor': 3})
         dc().stop({'motor': 4})
-        sero().up(1)
+        servo().up(1)
 
         time.sleep(2)
 

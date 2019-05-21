@@ -27,6 +27,9 @@ def wait(flag):
 
 
 class stepper:
+    def __init__(self):
+        pass
+
     # Calibrate stepper by driving it to the endstop and then into a neutral position
     def calibrate(self, msg):
         MOTOR.stepperSTOP(config.ADDR, config.MOTOR)

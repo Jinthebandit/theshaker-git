@@ -13,6 +13,9 @@ from ..data.settings import config
 
 
 class kamera:
+    def __init__(self):
+        pass
+
     # Take a picture with the camera and save it
     def calibrate(self, msg):
         camera = PiCamera()

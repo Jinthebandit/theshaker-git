@@ -5,6 +5,7 @@
       <option name="ignoredIdentifiers">
         <list>
           <option value="theshaker.common.programm.paho" />
+          <option value="theshaker.common.servo.pigpio" />
         </list>
       </option>
     </inspection_tool>
