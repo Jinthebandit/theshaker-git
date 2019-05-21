@@ -9,8 +9,10 @@ class config:
     TOPICS = ["stepper", "kamera", "dc", "servo", "prg"]
     # ---- /MQTT Settings ----
 
-    # ---- Stepper Settings ----
+    # ---- PiPlates Settings ----
     ADDR = 0
+
+    # ---- Stepper Settings ----
     MOTOR = "A"
     RES = "M8"
     SPEED = 500

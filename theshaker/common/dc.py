@@ -9,5 +9,9 @@ import paho.mqtt.client as mqtt
 from ..data.settings import config
 
 class dc:
-    def start(self,msg):
-        print("start dc")
+    def start(self, msg):
+        MOTOR.dcCONFIG(config.ADDR, msg['motor'], msg['dir'], msg['speed'], msg['acc'])
+        MOTOR.dcSTART(config.ADDR, msg['motor'])
+
+    def stop(self, msg):
+        MOTOR.dcSTOP(config.ADDR,msg['motor'])
