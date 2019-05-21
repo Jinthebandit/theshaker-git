@@ -15,7 +15,7 @@ client.connect(config.BROKER, config.PORT, 60)
 
 class prg:
     def __init__(self):
-        print('Programme geladen.')
+        pass
 
     def start(self, msg):
         stepper().calibrate(1)
@@ -37,7 +37,6 @@ class prg:
         prg().recursive(0)
 
     def recursive(self, load):
-        print('recursive')
         dc().start({'motor': 3, 'speed': 45, 'dir': 'cw', 'acc': 1})
         dc().start({'motor': 4, 'speed': 45, 'dir': 'cw', 'acc': 1})
         time.sleep(3)
@@ -49,9 +48,9 @@ class prg:
         stepper().calibrate(1)
         load = kamera().compare(1)
 
-        if load <= 95:
+        if load <= 92:
             prg().recursive(0)
         else:
             stepper().neutral(1)
             stepper().off(1)
-            client.publish("pdp/finished", True)
+            client.publish("pdp/finished", 'Das Programm wurde erfolgreich beendet.')
