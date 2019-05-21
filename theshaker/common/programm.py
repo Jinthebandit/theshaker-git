@@ -15,16 +15,19 @@ client.connect(config.BROKER, config.PORT, 60)
 
 class prg:
     def __init__(self):
-        print('Programme')
+        print('Programme geladen.')
 
     def prg2(self, msg):
         stepper().calibrate(1)
         kamera().calibrate(1)
 
         time.sleep(1)
+        prg().recursive(0)
 
+    def recursive(self, load):
+        print('recursive')
         dc().start({'motor': 3, 'speed': 45, 'dir': 'cw', 'acc': 1})
-        time.sleep(5)
+        time.sleep(3)
         dc().stop({'motor': 3})
 
         time.sleep(2)
@@ -34,7 +37,7 @@ class prg:
 
         if load <= 95:
             print('mehr Steine: {}'.format(load))
-            prg().prg2(' ', msg)
+            prg().recursive(0)
         else:
             print(load)
             stepper().off(1)
