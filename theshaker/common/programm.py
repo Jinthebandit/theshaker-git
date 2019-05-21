@@ -45,7 +45,7 @@ class prg:
         time.sleep(2)
 
         stepper().calibrate(1)
-        kamera().compare(1)
+        load = kamera().compare(1)
 
         if load <= 95:
             print('mehr Steine: {}'.format(load))
