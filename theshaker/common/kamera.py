@@ -64,6 +64,8 @@ class kamera:
 
         # Send MQTT message containing the difference in percent and the load status of the form
         percent = round((score-0.27) * 139)
+        if percent > 100:
+            percent = 100
         load = 100 - int(percent)
         client = mqtt.Client('')
         client.connect(config.BROKER, config.PORT, 60)
