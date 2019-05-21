@@ -14,4 +14,7 @@ class dc:
         MOTOR.dcSTART(config.ADDR, msg['motor'])
 
     def stop(self, msg):
-        MOTOR.dcSTOP(config.ADDR,msg['motor'])
+        MOTOR.dcSTOP(config.ADDR, msg['motor'])
+
+    def speed(self, msg):
+        MOTOR.dcSPEED(config.ADDR, msg['motor'], msg['speed'])
