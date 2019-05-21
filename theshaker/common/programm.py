@@ -40,7 +40,7 @@ class prg:
     def recursive(self, load):
         servo().neutral(1)
         dc().start({'motor': 3, 'speed': 45, 'dir': 'cw', 'acc': 1})
-        dc().start({'motor': 4, 'speed': 45, 'dir': 'cw', 'acc': 1})
+        dc().start({'motor': 4, 'speed': 47, 'dir': 'cw', 'acc': 1})
         time.sleep(5)
         dc().stop({'motor': 3})
         dc().stop({'motor': 4})
