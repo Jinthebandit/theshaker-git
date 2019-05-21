@@ -49,9 +49,9 @@ class kamera:
 
         # Color correction
         gray_a = cv2.cvtColor(roi_a, cv2.COLOR_BGR2GRAY)
-        # gray_a = cv2.GaussianBlur(gray_a, (5,5), 0)
+        gray_a = cv2.GaussianBlur(gray_a, (5,5), 0)
         gray_b = cv2.cvtColor(roi_b, cv2.COLOR_BGR2GRAY)
-        # gray_b = cv2.GaussianBlur(gray_b, (5,5), 0)
+        gray_b = cv2.GaussianBlur(gray_b, (5,5), 0)
 
         # Compare the images, return difference and score (score of 1 = no difference)
         (score, diff) = compare_ssim(gray_a, gray_b, full=True)
