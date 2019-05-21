@@ -38,11 +38,15 @@ class prg:
         prg().recursive(0)
 
     def recursive(self, load):
+        if load >= 80:
+            sleep = 2
+        else:
+            sleep = 8
         servo().neutral(1)
         dc().stop({"motor": 4})
         dc().start({'motor': 3, 'speed': 45, 'dir': 'cw', 'acc': 1})
         dc().start({'motor': 4, 'speed': 53, 'dir': 'cw', 'acc': 1})
-        time.sleep(5)
+        time.sleep(sleep)
         dc().stop({'motor': 3})
         dc().speed({'motor': 4, 'speed': 20})
         servo().up(1)
@@ -53,7 +57,7 @@ class prg:
         load = kamera().compare(1)
 
         if load <= 92:
-            prg().recursive(0)
+            prg().recursive(load)
         else:
             stepper().neutral(1)
             stepper().off(1)

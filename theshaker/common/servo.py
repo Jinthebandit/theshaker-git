@@ -13,8 +13,10 @@ class servo:
 
     def up(self, msg):
         pi().set_servo_pulsewidth(config.SERVO_PIN, config.SERVO_UP)
+        time.sleep(0.1)
         pi().stop()
 
     def neutral(self, msg):
         pi().set_servo_pulsewidth(config.SERVO_PIN, config.SERVO_NEUTRAL)
+        time.sleep(0.1)
         pi().stop()
