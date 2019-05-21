@@ -63,7 +63,7 @@ class kamera:
         camera.close()
 
         # Send MQTT message containing the difference in percent and the load status of the form
-        percent = round((score-0.27) * 139)
+        percent = round((score-0.35) * 156)
         if percent > 100:
             percent = 100
         if percent < 0:
