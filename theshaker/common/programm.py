@@ -53,4 +53,5 @@ class prg:
         else:
             stepper().neutral(1)
             stepper().off(1)
+            time.sleep(0.5)
             client.publish("pdp/finished", 'Das Programm wurde erfolgreich beendet.')
