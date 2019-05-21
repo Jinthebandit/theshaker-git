@@ -7,6 +7,7 @@ import paho.mqtt.client as mqtt
 # Local Imports
 from .stepper import stepper
 from .kamera import kamera
+from .servo import servo
 from .dc import dc
 from ..data.settings import config
 
