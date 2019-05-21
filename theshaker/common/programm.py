@@ -24,6 +24,18 @@ class prg:
         time.sleep(1)
         prg().recursive(0)
 
+    def stop(self, msg):
+        dc().stop({'motor': 3})
+        dc().stop({'motor': 4})
+        stepper().off(1)
+
+    def pause(self, msg):
+        dc().stop({'motor': 3})
+        dc().stop({'motor': 4})
+
+    def resume(self, msg):
+        prg().recursive(0)
+
     def recursive(self, load):
         print('recursive')
         dc().start({'motor': 3, 'speed': 45, 'dir': 'cw', 'acc': 1})
