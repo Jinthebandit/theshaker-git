@@ -43,7 +43,6 @@ class prg:
         else:
             sleep = 8
 
-        dc().stop({"motor": 4})
         servo().neutral(1)
         dc().start({'motor': 3, 'speed': 45, 'dir': 'cw', 'acc': 1})
         dc().start({'motor': 4, 'speed': 53, 'dir': 'cw', 'acc': 1})
@@ -51,6 +50,7 @@ class prg:
         dc().speed({'motor': 4, 'speed': 20})
         servo().up(1)
         time.sleep(5)
+        dc().stop({"motor": 4})
         dc().stop({'motor': 3})
 
         time.sleep(2)
@@ -58,7 +58,7 @@ class prg:
         stepper().calibrate(1)
         load = kamera().compare(1)
 
-        if load <= 92:
+        if load < 92:
             prg().recursive(load)
         else:
             stepper().neutral(1)
