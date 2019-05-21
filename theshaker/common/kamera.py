@@ -63,7 +63,7 @@ class kamera:
         camera.close()
 
         # Send MQTT message containing the difference in percent and the load status of the form
-        percent = round((score-0.286) * 142)
+        percent = round((score-0.27) * 139)
         load = 100 - int(percent)
         client = mqtt.Client('')
         client.connect(config.BROKER, config.PORT, 60)
