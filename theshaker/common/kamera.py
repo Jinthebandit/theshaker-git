@@ -67,7 +67,7 @@ class kamera:
         load = 100 - int(percent)
         client = mqtt.Client('')
         client.connect(config.BROKER, config.PORT, 60)
-        client.publish('pdp/score', percent)
+        client.publish('pdp/score', score)
         time.sleep(0.1)
         client.publish('pdp/load', load)
 
