@@ -21,5 +21,5 @@ class config:
     # ---- Servo Settings ----
     SERVO_PIN = 22 # Servo GPIO Pin Number
     SERVO_UP = 950
-    SERVO_NEUTRAL = 1100
+    SERVO_NEUTRAL = 1110
     # ---- /Servo Settings ----
