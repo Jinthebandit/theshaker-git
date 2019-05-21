@@ -22,7 +22,7 @@ class kamera:
         raw_capture1 = PiRGBArray(camera)
         time.sleep(0.5)
 
-        camera.capture(raw_capture1, format="bgr")
+        camera.capture(raw_capture1, format='bgr')
         calibrate = raw_capture1.array
 
         cv2.imwrite('/home/pi/Pictures/calibrate.jpg', calibrate)
@@ -35,7 +35,7 @@ class kamera:
         camera.rotation = 90
         raw_capture2 = PiRGBArray(camera)
         time.sleep(0.5)
-        camera.capture(raw_capture2, format="bgr")
+        camera.capture(raw_capture2, format='bgr')
         compare = raw_capture2.array
         cv2.imwrite('/home/pi/Pictures/compare.jpg', compare)
         time.sleep(0.1)
@@ -44,22 +44,22 @@ class kamera:
         compare = cv2.imread('/home/pi/Pictures/compare.jpg')
 
         # Region of Interest [y1:y2, x1:x2]
-        roiA = calibrate[100:370, 70:550]
-        roiB = compare[100:370, 70:550]
+        roi_a = calibrate[100:370, 70:550]
+        roi_b = compare[100:370, 70:550]
 
         # Color correction
-        grayA = cv2.cvtColor(roiA, cv2.COLOR_BGR2GRAY)
-        # grayA = cv2.GaussianBlur(grayA, (5,5), 0)
-        grayB = cv2.cvtColor(roiB, cv2.COLOR_BGR2GRAY)
-        # grayB = cv2.GaussianBlur(grayB, (5,5), 0)
+        gray_a = cv2.cvtColor(roi_a, cv2.COLOR_BGR2GRAY)
+        # gray_a = cv2.GaussianBlur(gray_a, (5,5), 0)
+        gray_b = cv2.cvtColor(roi_b, cv2.COLOR_BGR2GRAY)
+        # gray_b = cv2.GaussianBlur(gray_b, (5,5), 0)
 
         # Compare the images, return difference and score (score of 1 = no difference)
-        (score, diff) = compare_ssim(grayA, grayB, full=True)
+        (score, diff) = compare_ssim(gray_a, gray_b, full=True)
         diff = (diff * 255).astype('uint8')
 
         # Save difference image and compare image
         cv2.imwrite('/home/pi/Pictures/difference.jpg', diff)
-        cv2.imwrite('/home/pi/Pictures/compare.jpg', grayB)
+        cv2.imwrite('/home/pi/Pictures/compare.jpg', gray_b)
         camera.close()
 
         # Send MQTT message containing the difference in percent and the load status of the form
