@@ -34,7 +34,7 @@ class prg:
 
         if load <= 95:
             print('mehr Steine: {}'.format(load))
-            prg().prg2(' ',msg)
+            prg().prg2(' ', msg)
         else:
             print(load)
             stepper().off(1)
