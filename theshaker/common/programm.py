@@ -17,7 +17,7 @@ class prg:
     def __init__(self):
         print('Programme geladen.')
 
-    def prg2(self, msg):
+    def start(self, msg):
         stepper().calibrate(1)
         kamera().calibrate(1)
 
