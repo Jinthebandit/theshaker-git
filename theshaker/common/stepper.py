@@ -52,6 +52,15 @@ class stepper:
         MOTOR.stepperMOVE(config.ADDR, config.MOTOR, msg["steps"])
         wait(1)
 
+    def neutral(self, msg):
+        MOTOR.stepperSTOP(config.ADDR, config.MOTOR)
+        MOTOR.stepperCONFIG(config.ADDR, config.MOTOR, "ccw", "M8", 500, 0)
+        MOTOR.stepperJOG(config.ADDR, config.MOTOR)
+        endstop(1)
+        MOTOR.stepperCONFIG(config.ADDR, config.MOTOR, "cw", "M8", 1000, 0)
+        MOTOR.stepperMOVE(config.ADDR, config.MOTOR, 300)
+        wait(1)
+
     # Stop and turn off stepper
     def off(self, msg):
         MOTOR.stepperSTOP(config.ADDR, config.MOTOR)
