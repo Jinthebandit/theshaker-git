@@ -75,4 +75,4 @@ class kamera:
         time.sleep(0.1)
         client.publish('pdp/load', load)
 
-        return score
+        return load
