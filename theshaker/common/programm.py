@@ -24,13 +24,10 @@ class prg:
         prg().recursive(0, msg)
 
     def stop(self, msg):
+        print("stop")
         dc().stop({'motor': 3})
         dc().stop({'motor': 4})
         stepper().off(1)
-
-    def pause(self, msg):
-        dc().stop({'motor': 3})
-        dc().stop({'motor': 4})
 
     def resume(self, msg):
         prg().recursive(0)
