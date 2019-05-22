@@ -21,7 +21,7 @@ class prg:
         kamera().calibrate(1)
 
         time.sleep(1)
-        prg().recursive(0, msg)
+        prg().recursive(0)
 
     def stop(self, msg):
         print("stop")
@@ -32,7 +32,7 @@ class prg:
     def resume(self, msg):
         prg().recursive(0)
 
-    def recursive(self, load, msg):
+    def recursive(self, load):
         if load >= 80:
             sleep = 2
         else:
@@ -53,9 +53,9 @@ class prg:
         stepper().calibrate(1)
         load = kamera().compare(1)
 
-        if load < 91 & msg['pause'] is not True:
+        if load < 91:
             prg().recursive(load)
-        elif load >= 91 & msg['pause'] is not True:
+        else:
             client1 = mqtt.Client('')
             client1.connect(config.BROKER, config.PORT, 60)
             stepper().neutral(1)
@@ -63,5 +63,3 @@ class prg:
             stepper().off(1)
             client1.publish("pdp/finished", 'Das Programm wurde erfolgreich beendet.')
             client1.disconnect()
-        else:
-            print("paused")
