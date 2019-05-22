@@ -1,1 +1,1 @@
-#! /commong/__init__.py python3
+#! /common/__init__.py python3
