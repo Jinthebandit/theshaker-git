@@ -30,6 +30,7 @@ class prg:
         stepper().off(1)
 
     def resume(self, msg):
+        stepper().calibrate(1)
         prg().recursive(0)
 
     def recursive(self, load):
