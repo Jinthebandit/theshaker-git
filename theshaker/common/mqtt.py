@@ -32,6 +32,7 @@ def on_message(client, userdata, msg):
     my_string = str(msg.topic)
     channel, topic = my_string.split('/', 1)
 
+    # Check if topic is a preconfigured channel
     if topic in config.TOPICS:
         getattr(globals()[topic](), message['mode'])(message)  # Execute topic.mode(payload)
 
